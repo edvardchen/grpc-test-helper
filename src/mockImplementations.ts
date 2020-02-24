@@ -1,5 +1,5 @@
 import lodash from 'lodash';
-import { ServiceDefinition, handleUnaryCall } from 'grpc';
+import { ServiceDefinition, handleUnaryCall, ServerWritableStream } from 'grpc';
 
 export default function mockImplementations(
   pkgDef: ServiceDefinition<any>,
@@ -9,12 +9,21 @@ export default function mockImplementations(
     pkgDef,
     (
       acc: { [key: string]: handleUnaryCall<any, any> },
-      // @ts-ignore
-      { responseType },
+      {
+        // @ts-ignore
+        responseType,
+        responseStream,
+      },
       key
     ) => {
       if (!acc[key])
         acc[key] = (call, callwback) => {
+          if (responseStream) {
+            const streamCall = call as ServerWritableStream<unknown>;
+            streamCall.write({});
+            streamCall.end();
+            return;
+          }
           callwback(
             null,
             // function 表示是静态生成的 grpc 代码
