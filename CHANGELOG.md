@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com/edvardchen/grpc-test-helper/compare/v1.4.0...v2.0.0) (2020-02-27)
+
+
+### Features
+
+* startServer 支持静态和动态 ([7b08b97](https://github.com/edvardchen/grpc-test-helper/commit/7b08b97))
+
 ## [1.4.0](https://github.com/edvardchen/grpc-test-helper/compare/v1.3.0...v1.4.0) (2020-02-26)
 
 
