@@ -10,7 +10,7 @@
     "test": "jest",
     "prepublish": "npm run build",
     "build": "tsc",
-    "lint": "eslint src && tsc --noEmit",
+    "lint": "eslint src --ext ts && tsc --noEmit",
     "pretest": "npm run lint"
   },
   "repository": {
