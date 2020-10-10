@@ -1,5 +1,5 @@
 import path from 'path';
-import { ServiceDefinition } from 'grpc';
+import { ServiceDefinition } from '@grpc/grpc-js';
 
 export default function getServiceName(Service: ServiceDefinition<unknown>) {
   // randomly choose one method. All methods' paths are the same

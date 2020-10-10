@@ -1,5 +1,5 @@
 import path from 'path';
-import { Server } from 'grpc';
+import { Server } from '@grpc/grpc-js';
 import {
   unaryCallThenShutdown,
   getClient,
@@ -15,8 +15,8 @@ describe('startServer', () => {
   describe('statically', () => {
     let server: Server;
     let port;
-    beforeAll(() => {
-      const result = startServer({ Service: RouteGuideService });
+    beforeAll(async () => {
+      const result = await startServer({ Service: RouteGuideService });
       server = result.server;
       port = result.port;
     });
@@ -36,8 +36,8 @@ describe('startServer', () => {
   describe('dynamically', () => {
     let server: Server;
     let port;
-    beforeAll(() => {
-      const result = startServerDynamically({ PBFile, serviceName });
+    beforeAll(async () => {
+      const result = await startServerDynamically({ PBFile, serviceName });
       server = result.server;
       port = result.port;
     });

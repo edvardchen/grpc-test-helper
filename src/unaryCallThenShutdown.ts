@@ -1,4 +1,4 @@
-import { Server } from 'grpc';
+import { Server } from '@grpc/grpc-js';
 
 export default function unaryCallThenShutdown(
   client: any,

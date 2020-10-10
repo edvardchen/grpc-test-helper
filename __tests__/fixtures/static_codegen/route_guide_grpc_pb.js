@@ -16,62 +16,70 @@
 // limitations under the License.
 //
 'use strict';
-var grpc = require('grpc');
-var route_guide_pb = require('./route_guide_pb.js');
+var grpc = require('@grpc/grpc-js');
+var __tests___fixtures_protos_route_guide_pb = require('./route_guide_pb.js');
 
 function serialize_routeguide_Feature(arg) {
-  if (!(arg instanceof route_guide_pb.Feature)) {
+  if (!(arg instanceof __tests___fixtures_protos_route_guide_pb.Feature)) {
     throw new Error('Expected argument of type routeguide.Feature');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
 function deserialize_routeguide_Feature(buffer_arg) {
-  return route_guide_pb.Feature.deserializeBinary(new Uint8Array(buffer_arg));
+  return __tests___fixtures_protos_route_guide_pb.Feature.deserializeBinary(
+    new Uint8Array(buffer_arg)
+  );
 }
 
 function serialize_routeguide_Point(arg) {
-  if (!(arg instanceof route_guide_pb.Point)) {
+  if (!(arg instanceof __tests___fixtures_protos_route_guide_pb.Point)) {
     throw new Error('Expected argument of type routeguide.Point');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
 function deserialize_routeguide_Point(buffer_arg) {
-  return route_guide_pb.Point.deserializeBinary(new Uint8Array(buffer_arg));
+  return __tests___fixtures_protos_route_guide_pb.Point.deserializeBinary(
+    new Uint8Array(buffer_arg)
+  );
 }
 
 function serialize_routeguide_Rectangle(arg) {
-  if (!(arg instanceof route_guide_pb.Rectangle)) {
+  if (!(arg instanceof __tests___fixtures_protos_route_guide_pb.Rectangle)) {
     throw new Error('Expected argument of type routeguide.Rectangle');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
 function deserialize_routeguide_Rectangle(buffer_arg) {
-  return route_guide_pb.Rectangle.deserializeBinary(new Uint8Array(buffer_arg));
+  return __tests___fixtures_protos_route_guide_pb.Rectangle.deserializeBinary(
+    new Uint8Array(buffer_arg)
+  );
 }
 
 function serialize_routeguide_RouteNote(arg) {
-  if (!(arg instanceof route_guide_pb.RouteNote)) {
+  if (!(arg instanceof __tests___fixtures_protos_route_guide_pb.RouteNote)) {
     throw new Error('Expected argument of type routeguide.RouteNote');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
 function deserialize_routeguide_RouteNote(buffer_arg) {
-  return route_guide_pb.RouteNote.deserializeBinary(new Uint8Array(buffer_arg));
+  return __tests___fixtures_protos_route_guide_pb.RouteNote.deserializeBinary(
+    new Uint8Array(buffer_arg)
+  );
 }
 
 function serialize_routeguide_RouteSummary(arg) {
-  if (!(arg instanceof route_guide_pb.RouteSummary)) {
+  if (!(arg instanceof __tests___fixtures_protos_route_guide_pb.RouteSummary)) {
     throw new Error('Expected argument of type routeguide.RouteSummary');
   }
   return Buffer.from(arg.serializeBinary());
 }
 
 function deserialize_routeguide_RouteSummary(buffer_arg) {
-  return route_guide_pb.RouteSummary.deserializeBinary(
+  return __tests___fixtures_protos_route_guide_pb.RouteSummary.deserializeBinary(
     new Uint8Array(buffer_arg)
   );
 }
@@ -88,8 +96,8 @@ var RouteGuideService = (exports.RouteGuideService = {
     path: '/routeguide.RouteGuide/GetFeature',
     requestStream: false,
     responseStream: false,
-    requestType: route_guide_pb.Point,
-    responseType: route_guide_pb.Feature,
+    requestType: __tests___fixtures_protos_route_guide_pb.Point,
+    responseType: __tests___fixtures_protos_route_guide_pb.Feature,
     requestSerialize: serialize_routeguide_Point,
     requestDeserialize: deserialize_routeguide_Point,
     responseSerialize: serialize_routeguide_Feature,
@@ -105,8 +113,8 @@ var RouteGuideService = (exports.RouteGuideService = {
     path: '/routeguide.RouteGuide/ListFeatures',
     requestStream: false,
     responseStream: true,
-    requestType: route_guide_pb.Rectangle,
-    responseType: route_guide_pb.Feature,
+    requestType: __tests___fixtures_protos_route_guide_pb.Rectangle,
+    responseType: __tests___fixtures_protos_route_guide_pb.Feature,
     requestSerialize: serialize_routeguide_Rectangle,
     requestDeserialize: deserialize_routeguide_Rectangle,
     responseSerialize: serialize_routeguide_Feature,
@@ -120,8 +128,8 @@ var RouteGuideService = (exports.RouteGuideService = {
     path: '/routeguide.RouteGuide/RecordRoute',
     requestStream: true,
     responseStream: false,
-    requestType: route_guide_pb.Point,
-    responseType: route_guide_pb.RouteSummary,
+    requestType: __tests___fixtures_protos_route_guide_pb.Point,
+    responseType: __tests___fixtures_protos_route_guide_pb.RouteSummary,
     requestSerialize: serialize_routeguide_Point,
     requestDeserialize: deserialize_routeguide_Point,
     responseSerialize: serialize_routeguide_RouteSummary,
@@ -135,8 +143,8 @@ var RouteGuideService = (exports.RouteGuideService = {
     path: '/routeguide.RouteGuide/RouteChat',
     requestStream: true,
     responseStream: true,
-    requestType: route_guide_pb.RouteNote,
-    responseType: route_guide_pb.RouteNote,
+    requestType: __tests___fixtures_protos_route_guide_pb.RouteNote,
+    responseType: __tests___fixtures_protos_route_guide_pb.RouteNote,
     requestSerialize: serialize_routeguide_RouteNote,
     requestDeserialize: deserialize_routeguide_RouteNote,
     responseSerialize: serialize_routeguide_RouteNote,

@@ -1,6 +1,6 @@
 import lodash from 'lodash';
 import loadPB from './loadPB';
-import { Client, credentials } from 'grpc';
+import { Client, credentials } from '@grpc/grpc-js';
 
 export function getClient(pb: string, service: string, port: number) {
   const grpcObject = loadPB(pb);

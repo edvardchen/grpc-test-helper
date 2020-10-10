@@ -1,14 +1,19 @@
 import lodash from 'lodash';
-import { ServiceDefinition, handleUnaryCall, ServerWritableStream } from 'grpc';
+import {
+  UntypedServiceImplementation,
+  ServiceDefinition,
+  UntypedHandleCall,
+  ServerWritableStream,
+} from '@grpc/grpc-js';
 
 export default function mockImplementations(
-  pkgDef: ServiceDefinition<any>,
-  userImplementation: any = {}
+  pkgDef: ServiceDefinition,
+  userImplementation?: UntypedServiceImplementation
 ) {
   const result = lodash.transform(
     pkgDef,
     (
-      acc: { [key: string]: handleUnaryCall<any, any> },
+      acc,
       {
         // @ts-ignore
         responseType,
@@ -17,9 +22,10 @@ export default function mockImplementations(
       key
     ) => {
       if (!acc[key])
-        acc[key] = (call, callwback) => {
+        // @ts-ignore
+        acc[key] = ((call, callwback) => {
           if (responseStream) {
-            const streamCall = call as ServerWritableStream<unknown>;
+            const streamCall = call as ServerWritableStream<unknown, unknown>;
             streamCall.write({});
             streamCall.end();
             return;
@@ -29,7 +35,7 @@ export default function mockImplementations(
             // function 表示是静态生成的 grpc 代码
             typeof responseType === 'function' ? new responseType() : {}
           );
-        };
+        }) as UntypedHandleCall;
     },
     userImplementation
   );

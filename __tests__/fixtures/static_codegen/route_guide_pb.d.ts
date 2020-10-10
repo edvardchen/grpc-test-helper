@@ -1,5 +1,5 @@
 // package: routeguide
-// file: route_guide.proto
+// file: __tests__/fixtures/protos/route_guide.proto
 
 import * as jspb from 'google-protobuf';
 

@@ -4,35 +4,34 @@ import {
   loadPackageDefinition,
   ServiceDefinition,
   ServerCredentials,
-} from 'grpc';
+  UntypedServiceImplementation,
+} from '@grpc/grpc-js';
 import { loadSync } from '@grpc/proto-loader';
 import mockImplementations from './mockImplementations';
 import randomPort from './randomPort';
-import getServiceName from './util/getServiceName';
+import { promisify } from 'util';
+import { ServiceClientConstructor } from '@grpc/grpc-js/build/src/make-client';
 
 /**
  * 从 ServiceDefinition 初始化 Server
  */
-export function startServer({
+export async function startServer({
   Service,
   port = randomPort(),
   implementations,
 }: {
   port?: number;
-  implementations?: unknown;
-  Service: ServiceDefinition<unknown>;
+  implementations?: UntypedServiceImplementation;
+  Service: ServiceDefinition<UntypedServiceImplementation>;
 }) {
   const server = new Server();
 
   server.addService(Service, mockImplementations(Service, implementations));
 
-  const boundPort = server.bind(
+  await promisify(server.bindAsync.bind(server))(
     `localhost:${port}`,
     ServerCredentials.createInsecure()
   );
-
-  if (!boundPort)
-    throw new Error(`start server ${getServiceName(Service)} failed`);
 
   server.start();
 
@@ -50,12 +49,15 @@ export function startServerDynamically({
   PBFile: string;
   serviceName: string;
   port?: number;
-  implementations?: unknown;
+  implementations?: UntypedServiceImplementation;
 }) {
   const pkgDef = loadSync(PBFile, { defaults: true, objects: true });
   const grpcObject = loadPackageDefinition(pkgDef);
 
-  const Service = lodash.get(grpcObject, `${serviceName}.service`);
+  const Service = (lodash.get(
+    grpcObject,
+    `${serviceName}`
+  ) as ServiceClientConstructor).service;
 
   return startServer({
     Service,
